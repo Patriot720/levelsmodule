@@ -202,6 +202,7 @@ class LevelsModule extends Module
             if($total_orders > $lvl_money){
                 $lvl = $this->setLvl($i);
                 $discount = (int)Group::searchByName('lvl'.$lvl)['reduction'];
+                $difference = Configuration::get('levels_module_lvl'.($lvl+1)) - $total_orders;
                 break;
             }
         }
@@ -213,7 +214,8 @@ class LevelsModule extends Module
                 'levels_module_total_orders' => $total_orders,
                 'levels_module_is_buyer' => $isBuyer,
                 'levels_module_discount' => $discount,
-                'levels_module_current_lvl' => $lvl
+                'levels_module_current_lvl' => $lvl,
+                'levels_module_until_next' => $difference
             )
             );
         return $this->display(__FILE__, 'levelsmodule.tpl');

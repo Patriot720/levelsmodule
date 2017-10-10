@@ -16,9 +16,10 @@
   </div>
 </div> *}
 <div class="col-sm-4 clearfix">
-<div class="shopping_cart levels_module">
+<div class="levels_module">
 {if isset($levels_module_total_orders) && $levels_module_total_orders !== null}
-  <a href="{$levels_module_module_url}">Текущая скидка {$levels_module_discount}%</a>
+  <a href="{$levels_module_module_url}">Текущая скидка <div class="levels_discount">{$levels_module_discount}%</div></a>
+  <a href="{$levels_module_module_url}">До следущего уровня осталось <div class="levels_discount">{$levels_module_until_next}Р</div></a>
 {elseif isset($levels_module_is_buyer) && $levels_module_is_buyer}
   <a href="{$levels_module_module_url}">Купи ченить и стань богом</a>
 {elseif isset($levels_module_is_guest) && $levels_module_is_guest}

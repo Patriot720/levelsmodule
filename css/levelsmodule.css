@@ -1,4 +1,23 @@
-div#mymodule_block_home p {
-    font-size: 150%;
-    font-style:italic;
-  }
+div.levels_module a {
+  background:#333;
+  display: block;
+  padding: 10px 10px 10px 16px;;
+  width:270px;
+  font-weight: bold;
+  text-shadow: 1px 1px rgba(0,0,0,0.2);
+  overflow: hidden;
+  color:#aaa;
+  line-height: 30px;
+  text-align: left;
+}
+div.levels_module a:focus{
+  text-decoration: none;
+}
+.levels_discount {
+  float: right;
+  height: 30px;
+  color: #aaa;
+  background: rgba(255,255,255,0.15);
+  text-align:center;
+  line-height: 30px;
+}

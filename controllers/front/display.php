@@ -22,7 +22,7 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
   //  // $this->addJS($this->module->_path.'/views/js/wtf.js');
    
   //   $this->setTemplate('vassa.tpl');
-
+    $this->display_column_left = FALSE;
     $this->addCSS($this->module->getPathUri().'/css/wtf.css');
     $this->addJS($this->module->getPathUri().'/js/wtf.js');
     parent::initContent();

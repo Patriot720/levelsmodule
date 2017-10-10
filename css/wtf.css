@@ -1,0 +1,29 @@
+.levels_top,.levels_bot,.levels_mid{
+    width:250px;
+    height: 600px;
+    background: #aaa;
+    margin-bottom: 1px;
+}
+.levels_top,.levels_bot{
+    width: 250px;
+    height: 300px;
+}
+.levels_mid .lvl{
+    text-align: right;
+    position: relative;
+    padding-top:5px;
+    right:-45px;
+}
+.levels_mid .lvl:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background: black;
+    margin-right: 45px;
+}
+.levels_whole{
+    float: right;
+}
+.lvl_key{
+}
