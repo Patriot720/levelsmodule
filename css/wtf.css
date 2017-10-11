@@ -1,29 +1,86 @@
-.levels_top,.levels_bot,.levels_mid{
-    width:250px;
-    height: 600px;
-    background: #aaa;
-    margin-bottom: 1px;
+.levels_mid, .levels_top,
+.levels_bot {
+  width: 250px;
+  height: 600px;
+  background: #aaa;
+  margin-bottom: 1px;
 }
-.levels_top,.levels_bot{
-    width: 250px;
-    height: 300px;
+
+.levels_mid .levels_container, .levels_top .levels_container,
+.levels_bot .levels_container {
+  height: 100%;
 }
-.levels_mid .lvl{
-    text-align: right;
-    position: relative;
-    padding-top:5px;
-    right:-45px;
+
+.levels_mid .levels_container .levels_wrapper, .levels_top .levels_container .levels_wrapper,
+.levels_bot .levels_container .levels_wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
-.levels_mid .lvl:before{
-    content: '';
-    display: inline-block;
-    width: 15px;
-    height: 1px;
-    background: black;
-    margin-right: 45px;
+
+.levels_mid .levels_container .levels_fill, .levels_top .levels_container .levels_fill,
+.levels_bot .levels_container .levels_fill {
+  background: blue;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
-.levels_whole{
-    float: right;
+
+.levels_mid .levels_container .levels_fill p, .levels_top .levels_container .levels_fill p,
+.levels_bot .levels_container .levels_fill p {
+  position: absolute;
+  left: -100%;
 }
-.lvl_key{
+
+.levels_mid .levels_container .levels_fill img, .levels_top .levels_container .levels_fill img,
+.levels_bot .levels_container .levels_fill img {
+  position: relative;
+  left: -10px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
 }
+
+.levels_mid .levels_container .lvl, .levels_top .levels_container .lvl,
+.levels_bot .levels_container .lvl {
+  text-align: right;
+  position: relative;
+  right: -45px;
+}
+
+.levels_mid .levels_container .lvl .lvl_key, .levels_top .levels_container .lvl .lvl_key,
+.levels_bot .levels_container .lvl .lvl_key {
+  color: orange;
+  position: absolute;
+  right: -5px;
+  top: 0px;
+}
+
+.levels_mid .levels_container .lvl .lvl_amount, .levels_top .levels_container .lvl .lvl_amount,
+.levels_bot .levels_container .lvl .lvl_amount {
+  color: orange;
+  position: absolute;
+  right: -50px;
+  top: 0px;
+}
+
+.levels_mid .levels_container .lvl .lvl_pointer, .levels_top .levels_container .lvl .lvl_pointer,
+.levels_bot .levels_container .lvl .lvl_pointer {
+  position: relative;
+  left: -40px;
+  width: 20px;
+  height: 20px;
+}
+
+.levels_top,
+.levels_bot {
+  width: 250px;
+  height: 600px;
+}
+
+.levels_whole {
+  float: right;
+}
+ 
+
+ /*# sourceMappingURL= wtf.css.map */

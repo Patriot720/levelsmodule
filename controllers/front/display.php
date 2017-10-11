@@ -25,10 +25,17 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
     $this->display_column_left = FALSE;
     $this->addCSS($this->module->getPathUri().'/css/wtf.css');
     $this->addJS($this->module->getPathUri().'/js/wtf.js');
+    $maximum = Configuration::get("levels_module_count");
+    $all = $this->getAll();
+    $max = $all['lvl'.$maximum];
+    $link = new Link();
     parent::initContent();
     $this->context->smarty->assign(
       array(
-        'levels_module_all_levels' => $this->getAll(),
+        'levels_module_all_levels' =>$all,
+        'levels_module_percent' => $this->getHeights($all),
+        'levels_module_max_value' => $max,
+        'arrow' => $link->getBaseLink() . "/modules/levelsmodule/" . 'arrow.png',
       )
       );
     $this->setTemplate('display.tpl');
@@ -36,6 +43,18 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
 
 
 
+  }
+  private function getHeights($res){
+    $arr = array();
+    $maximum = Configuration::get("levels_module_count");
+    $max = $res['lvl'.$maximum];
+    $previous = 0;
+    for($i = 3; $i <= $maximum;$i++){
+      $value = $res['lvl'.$i];
+      $arr['lvl'.$i] = 100*(($value / $max) - $previous);
+      $previous = $value / $max;
+    }
+    return $arr;
   }
   private function getAll(){
   $res = array();
@@ -46,4 +65,5 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
       }
       return $res;
   }
+  
   }
