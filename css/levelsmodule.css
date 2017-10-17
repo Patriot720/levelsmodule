@@ -21,3 +21,6 @@ div.levels_module a:focus{
   text-align:center;
   line-height: 30px;
 }
+.levels_nofloat {
+  float:none;
+}

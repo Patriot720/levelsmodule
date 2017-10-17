@@ -2,8 +2,7 @@
 .levels_bot {
   width: 250px;
   height: 600px;
-  background: #aaa;
-  margin-bottom: 1px;
+  background: url("../vape_middle.png");
 }
 
 .levels_mid .levels_container, .levels_top .levels_container,
@@ -20,7 +19,7 @@
 
 .levels_mid .levels_container .levels_fill, .levels_top .levels_container .levels_fill,
 .levels_bot .levels_container .levels_fill {
-  background: blue;
+  background: rgba(0, 0, 255, 0.3);
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -75,7 +74,15 @@
 .levels_top,
 .levels_bot {
   width: 250px;
-  height: 600px;
+  height: 200px;
+}
+
+.levels_top {
+  background: url("../vape_top.png");
+}
+
+.levels_bot {
+  background: url("../vape_bottom.png");
 }
 
 .levels_whole {

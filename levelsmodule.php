@@ -4,25 +4,24 @@ if (!defined('_PS_VERSION_')) {
 }
 class LevelsModule extends Module
 {
+    private $RUN_TESTS = 0;
+    public $LVL_MIN = 3;
     public function __construct()
     {
         $this->name = 'levelsmodule';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
-        $this->author = 'Firstname Lastname';
+        $this->author = 'Andrew Serkin';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
         $this->bootstrap = true;
 
         parent::__construct();
 
-        $this->displayName = $this->l('My module');
-        $this->description = $this->l('Description of my module.');
+        $this->displayName = $this->l('Levels Module');
+        $this->description = $this->l('Loyalty plan module');
 
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-        if (!Configuration::get('MYMODULE_NAME')) {
-            $this->warning = $this->l('No name provided');
-        }
     }
     public function install()
     {
@@ -33,20 +32,25 @@ class LevelsModule extends Module
                 Configuration::updateValue('levels_module_count', 12);
                 for($lvl = 1; $lvl <= 12;$lvl++){
                     Configuration::updateValue('levels_module_lvl'.$lvl,2000*$lvl);
-                    $group = new Group(null,PS_LANG_DEFAULT);
-                    $group->name = 'lvl'.$lvl;
-                    if($lvl == 1)
-                        $group->reduction = '5.00';
-                    elseif ($lvl == 2) {
-                        $group->reduction = '15.00';
+                    $reduction = 15 + $lvl - 2;
+                    if($lvl == 1){
+                        $reduction = 5;
+                        Configuration::updateValue('levels_module_lvl'.$lvl,0);
                     }
-                    else {
-                        $group->reduction = (string)(15 + $lvl - 2);    
+                    if($lvl == 2){
+                        $reduction = 15;
+                        Configuration::updateValue('levels_module_lvl'.$lvl,0);
                     }
-                    $group->price_display_method = 0;
-                    $group->add();
+                    $this->createGroup($lvl,$reduction);
                 }
         return true;
+    }
+    private function createGroup($lvl,$reduction){
+        $group = new Group(null,PS_LANG_DEFAULT);
+        $group->name = 'lvl'.$lvl;
+        $group->reduction = $reduction;
+        $group->price_display_method = 0;
+        $group->add();
     }
     public function uninstall(){
             parent::uninstall();
@@ -63,7 +67,7 @@ class LevelsModule extends Module
          $output = null;
          if (Tools::isSubmit('submit' . $this->name)){
             $count = Configuration::get('levels_module_count');
-            for($i = 3; $i <= $count;$i++){
+            for($i = $this->LVL_MIN; $i <= $count;$i++){
                 $lvl = Tools::getValue('levels_module_lvl'.$i);
                 if(!$lvl ||
                     empty($lvl)
@@ -123,7 +127,7 @@ class LevelsModule extends Module
         
        // Load current value
        $count = Configuration::get('levels_module_count');
-       for($i = 3; $i <= $count;$i++){
+       for($i = $this->LVL_MIN; $i <= $count;$i++){
            $helper->fields_value['levels_module_lvl'.$i] = Configuration::get('levels_module_lvl'.$i);
        };
        $helper->fields_value['MYMODULE_NAME'] = Configuration::get('MYMODULE_NAME');
@@ -133,7 +137,7 @@ class LevelsModule extends Module
      private function generateLevels(){
         $count = Configuration::get('levels_module_count');
         $levels = array();
-        for($i = 3; $i <= $count;$i++){
+        for($i = $this->LVL_MIN; $i <= $count;$i++){
             array_push($levels,array(
                 'type' => 'text',
                 'label' => $this->l("Level ".$i),
@@ -144,32 +148,6 @@ class LevelsModule extends Module
         };
         return $levels;
      }
-    // public function getContent()
-    // {
-    //     $output = null;
-
-    //     if (Tools::isSubmit('submit' . $this->name))
-    //         {
-    //         $my_module_name = strval(Tools::getValue('MYMODULE_NAME'));
-    //         if (!$my_module_name
-    //             || empty($my_module_name)
-    //             || !Validate::isGenericName($my_module_name))
-    //             $output .= $this->displayError($this->l('Invalid Configuration value'));
-    //         else
-    //             {
-    //             Configuration::updateValue('MYMODULE_NAME', $my_module_name);
-    //             $output .= $this->displayConfirmation($this->l('Settings updated'));
-    //         }
-    //     }
-    //     return $output . $this->displayForm();
-    // }
-    // public function displayForm()
-    // {
-    //   // Get default language
-    //     $default_lang = (int)Configuration::get('PS_LANG_DEFAULT');
-    //     $helper = $this->generateList();
-    //     return $helper->generateList('',$this->fields_form);
-    // }
     public function hookDisplayRightColumn($params)
     {
         return $this->hookDisplayLeftColumn($params);
@@ -181,14 +159,15 @@ class LevelsModule extends Module
         return $lvl;
     }
     public function hookDisplayTop($params){
+        $this->runTests();
         $link = new Link();
-        $login_url = $link->getBaseLink() . 'login';
-        $module_url = $link->getModuleLink('levelsmodule','display');
-        $stats = $this->context->customer->getStats();
-        $isGuest = !$this->context->customer->isLogged();
+        $customer = $this->context->customer;
+        $stats = $customer->getStats();
+        $isGuest = !$customer->isLogged();
         $total_orders = (int)$stats['total_orders'];
         $isBuyer = $total_orders ? true : false;
         $discount = 0;
+        var_dump($buying_table);
         if($isBuyer){
             $lvl = $this->setLvl(2);
             $discount = 15;
@@ -197,7 +176,7 @@ class LevelsModule extends Module
             $lvl = $this->setLvl(1);
         }
         $count = Configuration::get('levels_module_count');
-        for($i = $count; $i >= 3;$i--){
+        for($i = $count; $i >= $this->LVL_MIN;$i--){
             $lvl_money = Configuration::get('levels_module_lvl'.$i);
             if($total_orders > $lvl_money){
                 $lvl = $this->setLvl($i);
@@ -208,8 +187,8 @@ class LevelsModule extends Module
         }
         $this->context->smarty->assign(
             array(
-                'levels_module_login_url' => $login_url,
-                'levels_module_module_url' => $module_url,
+                'levels_module_login_url' => $link->getBaseLink() . 'login',
+                'levels_module_module_url' => $link->getModuleLink('levelsmodule','display'),
                 'levels_module_is_guest' => $isGuest,
                 'levels_module_total_orders' => $total_orders,
                 'levels_module_is_buyer' => $isBuyer,
@@ -234,5 +213,36 @@ class LevelsModule extends Module
     public function hookDisplayHeader()
     {
         $this->context->controller->addCSS($this->_path . 'css/levelsmodule.css', 'all');
+    }
+    private $tests_count = 1;
+    private function runTests(){
+        if($this->RUN_TESTS){
+            $this->setLvlShouldChangeLvl();
+        }
+    }
+    private function assertTrue($assertion,$message = "Passed "){
+        if($assertion){
+            var_dump($message.$this->$test_count++);
+        } else{
+            var_dump("Not Passed".$this->tests_count++);
+        }
+    }
+    private function assertEqual($first,$second,$message = "Passed "){
+        if($first == $second){
+            var_dump($message.$this->tests_count++);
+        } else{
+            var_dump($this->tests_count++." Expected ".$first." To be equal to ".$second." But it wasn't");
+        }
+    }
+    private function setLvlShouldChangeLvl(){
+        $this->setLvl(2);
+        $lvl = $this->context->customer->id_default_group;
+        $lvl = new Group($lvl,1);
+        $this->assertEqual($lvl->name,"lvl2");
+    }
+    private function iterateLevels_should_do_func_with_args_on_each_iteration(){
+        $this->iterateLevels(function(){
+
+        });
     }
 }

@@ -2,7 +2,7 @@
 
 </div> *}
 <div class="levels_whole">
-<div class="levels_top">Верх бака</div>
+<div class="levels_top"></div>
 <div class="levels_mid">
 <div class="levels_container">
 <div class="levels_wrapper">
@@ -22,7 +22,7 @@
 </div>
 </div>
 </div>
-<div class="levels_bot">Низ бака</div>
+<div class="levels_bot"></div>
 
 </div>
 Текущий ЛВЛ {$levels_module_current_lvl}<br>
