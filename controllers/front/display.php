@@ -18,26 +18,28 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
         'levels_module_percent' => $this->getTotalOrdersRelativePositions($levels_limits),
         'levels_module_max_value' => $max_lvl_limit,
         'arrow' => $link->getBaseLink() . "/modules/levelsmodule/" . 'arrow.png',
-        'order_history' => $this->getOrdersHistory()
+        'order_history' => $this->getOrdersHistory(10)
       )
       );
     $this->setTemplate('display.tpl');
   }
-  private function getOrdersHistory(){
+  private function getOrdersHistory($count){
     $customer = $this->context->customer;
+    $orders =  Order::getCustomerOrders($customer->id);
     $buying_history = $customer->getBoughtProducts();
     $buying = array();
-    foreach ($buying_history as $value) {
+    $i = 0;
+    foreach ($orders as $value) {
+        if($i > $count)break;
         $buying_table = array();
-        $buying_table['name'] = $value['product_name'];
-        $buying_table['price'] = $value['total_price_tax_incl'];
-        $buying_table['quantity'] = $value['product_quantity'];
-        $buying_table['id'] = $value['product_id'];
+        $buying_table['price'] = $value['total_paid'];
+        $buying_table['quantity'] = $value['nb_products'];
+        $buying_table['id'] = $value['id_order'];
         $buying_table['valid'] = $value['valid'];
-        $l = new Order($value['id_order'],1);
-        $buying_table['current_state'] = $l->getCurrentStateFull(1)['name'];
-        // $buying_table['current_state'] = $value->getCurrentStateFull();
+        $buying_table['current_state'] = $value['order_state'];
+        $buying_table['current_state_color'] = $value['order_state_color'];
         array_push($buying,$buying_table);
+        $i++;
     }
     return $buying;
   }

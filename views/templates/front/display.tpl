@@ -28,3 +28,24 @@
 Текущий ЛВЛ {$levels_module_current_lvl}<br>
 Текущая скидка {$levels_module_discount}%<br>
 Всего заплачено {$levels_module_total_orders}
+<table>
+<thead>
+<tr>
+<th class="first_item footable-first-column" data-sort-ignore="true">ID</th>
+<th class="item footable-sortable">Всего оплачено<span class="footable-sort-indicator"></span></th>
+<th class="item footable-sortable">Количество товаров<span class="footable-sort-indicator"></span></th>
+<th class="item footable-sortable">Статус заказа<span class="footable-sort-indicator"></span></th>
+<th class="item footable-sortable">Проверен ли платеж<span class="footable-sort-indicator"></span></th>
+</tr>
+</thead>
+{foreach from=$order_history item=item key=key name=name}
+<tr>
+<td>{$item['id']}</td>
+<td>{$item['price']}</td>
+<td>{$item['quantity']}</td>
+<td><span class="label" style="background-color:{$item['current_state_color']}; border-color:{$item['current_state_color']};">{$item['current_state']}</span></td>
+<td>{($item['valid'] == 1)?"Yes":"No"}</td>
+</tr>
+{/foreach}
+<a href="{Link::getBaseLink()}addresses" title="Addresses"><i class="icon-building"></i><span>Мои адреса</span></a>
+</table>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
 	<name>levelsmodule</name>
-	<displayName><![CDATA[My module]]></displayName>
+	<displayName><![CDATA[Levels Module]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Description of my module.]]></description>
-	<author><![CDATA[Firstname Lastname]]></author>
+	<description><![CDATA[Loyalty plan module]]></description>
+	<author><![CDATA[Andrew Serkin]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<confirmUninstall><![CDATA[Are you sure you want to uninstall?]]></confirmUninstall>
 	<is_configurable>1</is_configurable>
