@@ -17,22 +17,40 @@
   position: relative;
 }
 
+.levels_mid .levels_container .levels_levels, .levels_top .levels_container .levels_levels,
+.levels_bot .levels_container .levels_levels {
+  position: relative;
+  width: 100%;
+}
+
+.levels_mid .levels_container .levels_fill_wrap, .levels_top .levels_container .levels_fill_wrap,
+.levels_bot .levels_container .levels_fill_wrap {
+  width: 250px;
+  height: 600px;
+  position: absolute;
+  overflow-y: hidden;
+}
+
 .levels_mid .levels_container .levels_fill, .levels_top .levels_container .levels_fill,
-.levels_bot .levels_container .levels_fill {
+.levels_bot .levels_container .levels_fill, .levels_mid .levels_container .levels_hidden, .levels_top .levels_container .levels_hidden,
+.levels_bot .levels_container .levels_hidden {
   background: rgba(0, 0, 255, 0.3);
   width: 100%;
   position: absolute;
   bottom: 0;
+  animation-delay: 2s;
 }
 
 .levels_mid .levels_container .levels_fill p, .levels_top .levels_container .levels_fill p,
-.levels_bot .levels_container .levels_fill p {
+.levels_bot .levels_container .levels_fill p, .levels_mid .levels_container .levels_hidden p, .levels_top .levels_container .levels_hidden p,
+.levels_bot .levels_container .levels_hidden p {
   position: absolute;
   left: -100%;
 }
 
 .levels_mid .levels_container .levels_fill img, .levels_top .levels_container .levels_fill img,
-.levels_bot .levels_container .levels_fill img {
+.levels_bot .levels_container .levels_fill img, .levels_mid .levels_container .levels_hidden img, .levels_top .levels_container .levels_hidden img,
+.levels_bot .levels_container .levels_hidden img {
   position: relative;
   left: -10px;
   top: 0px;
@@ -75,6 +93,19 @@
 .levels_bot {
   width: 250px;
   height: 200px;
+}
+
+.levels_hidden {
+  background: none !important;
+}
+
+.levels_hidden div {
+  animation-delay: 2s;
+}
+
+.levels {
+  background: #333;
+  height: 100%;
 }
 
 .levels_top {

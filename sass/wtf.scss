@@ -11,11 +11,23 @@ $height: 600px;
             height: 100%;
             position: relative;
         }
+        
+        .levels_levels{
+            position: relative;
+            width: 100%;
+        }
+        .levels_fill_wrap{
+            width: $width;
+            height: $height;
+            position: absolute;
+            overflow-y: hidden;
+        }
         .levels_fill{
             background:fade-out(blue,.7);
             width: 100%;
             position: absolute;
             bottom: 0;
+            animation-delay: 2s;
             p{
                 position: absolute;
                 left: -100%;
@@ -59,6 +71,17 @@ $height: 600px;
     @extend .levels_mid;
     width: $width;
     height: $height/3;
+}
+.levels_hidden{
+    @extend .levels_fill;
+    background: none!important;
+    div{
+        animation-delay: 2s;
+    }
+}
+.levels{
+    background:#333;
+    height: 100%;
 }
 .levels_top{
     background: url("../vape_top.png");
