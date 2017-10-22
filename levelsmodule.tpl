@@ -15,7 +15,6 @@
     </ul>
   </div>
 </div> *}
-<div class="col-sm-4 clearfix">
 <div class="levels_module">
 {if isset($levels_module_total_orders) && $levels_module_total_orders}
   <a href="{$levels_module_module_url}">Текущая скидка <div class="levels_discount">{$levels_module_discount}%</div></a>
@@ -25,6 +24,5 @@
 {elseif isset($levels_module_is_buyer) && !$levels_module_is_buyer}
   <a href="{$levels_module_module_url}">Получи скидку <div class="levels_discount levels_nofloat">15%</div> после первой покупки</a>
   {/if}
-</div>
 </div>
 <!-- /Block mymodule -->

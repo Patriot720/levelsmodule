@@ -167,24 +167,26 @@ class LevelsModule extends Module
         $total_orders = (int)$stats['total_orders'];
         $isBuyer = $total_orders ? true : false;
         $discount = 0;
-        var_dump($buying_table);
         if($isBuyer){
             $lvl = $this->setLvl(2);
             $discount = 15;
         }
         elseif(!$isGuest){
             $lvl = $this->setLvl(1);
+            $discount =5;
         }
         $count = Configuration::get('levels_module_count');
         for($i = $count; $i >= $this->LVL_MIN;$i--){
             $lvl_money = Configuration::get('levels_module_lvl'.$i);
             if($total_orders > $lvl_money){
                 $lvl = $this->setLvl($i);
+                var_dump(Group::searchByName('lvl'.$lvl));
                 $discount = (int)Group::searchByName('lvl'.$lvl)['reduction'];
-                $difference = Configuration::get('levels_module_lvl'.($lvl+1)) - $total_orders;
+                var_dump($difference);
                 break;
             }
         }
+        $difference = Configuration::get('levels_module_lvl'.($lvl+1)) - $total_orders;
         $this->context->smarty->assign(
             array(
                 'levels_module_login_url' => $link->getBaseLink() . 'login',
@@ -197,16 +199,6 @@ class LevelsModule extends Module
                 'levels_module_until_next' => $difference
             )
             );
-        return $this->display(__FILE__, 'levelsmodule.tpl');
-    }
-    public function hookDisplayLeftColumn($params)
-    {
-        $this->context->smarty->assign(
-            array(
-                'my_module_name' => Configuration::get('MYMODULE_NAME'),
-                'my_module_link' => $this->context->link->getModuleLink('levelsmodule', 'display')
-            )
-        );
         return $this->display(__FILE__, 'levelsmodule.tpl');
     }
 

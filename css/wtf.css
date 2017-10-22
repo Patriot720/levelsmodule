@@ -1,6 +1,7 @@
 .levels_mid, .levels_top,
 .levels_bot {
-  width: 250px;
+  width: 230px;
+  margin: 0 auto;
   height: 600px;
   background: url("../vape_middle.png");
 }
@@ -25,8 +26,8 @@
 
 .levels_mid .levels_container .levels_fill_wrap, .levels_top .levels_container .levels_fill_wrap,
 .levels_bot .levels_container .levels_fill_wrap {
-  width: 250px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   overflow-y: hidden;
 }
@@ -116,8 +117,92 @@
   background: url("../vape_bottom.png");
 }
 
+.levels_menu_item {
+  padding: 20px;
+  width: 30%;
+  color: #aaa;
+}
+
+.levels_menu_item p {
+  width: 150px;
+  font-size: 1.3em;
+  float: left;
+  line-height: 30px;
+  text-align: center;
+  padding-right: 10px;
+}
+
+.levels_menu_item div {
+  background: rgba(255, 255, 255, 0.15);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  float: left;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
 .levels_whole {
+  animation-delay: 1s;
   float: right;
+  padding-right: 100px;
+}
+
+.all_levels {
+  animation-delay: 2s;
+}
+
+.levels_label {
+  opacity: .7;
+}
+
+.levels_menu {
+  height: 20%;
+  animation-delay: 1s;
+}
+
+.levels a {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  width: 147px;
+  height: 40px;
+}
+
+.levels a span {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  color: #aaa;
+  display: block;
+  margin: 0 auto;
+  line-height: 40px;
+  text-align: center;
+}
+
+.levels a i {
+  font-size: 25px !important;
+  color: #aaa;
+}
+
+.levels_buttons {
+  animation-delay: 3s;
+  height: 10%;
+  padding-top: 10px;
+  padding-left: 35px;
+}
+
+table {
+  animation-delay: 2s;
+  position: absolute;
+  top: 250px;
+  left: 50px;
+  width: 50%;
+  height: 30%;
+  background: rgba(255, 255, 255, 0.15);
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  color: #aaa;
+}
+
+table td, table th {
+  border-color: #333 !important;
 }
  
 

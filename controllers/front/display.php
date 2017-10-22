@@ -6,11 +6,13 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
   {
     $this->max_lvl = Configuration::get("levels_module_count");
     $this->display_column_left = FALSE;
+    $this->display_column_right = FALSE;
     $this->addCSS($this->module->getPathUri().'/css/wtf.css');
     $this->addJS($this->module->getPathUri().'/js/wtf.js');
     $levels_limits = $this->getLevelsLimits();
     $max_lvl_limit = $levels_limits['lvl'.$this->max_lvl];
     $link = new Link();
+    var_dump("");
     parent::initContent();
     $this->context->smarty->assign(
       array(
@@ -18,7 +20,8 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
         'levels_module_percent' => $this->getTotalOrdersRelativePositions($levels_limits),
         'levels_module_max_value' => $max_lvl_limit,
         'arrow' => $link->getBaseLink() . "/modules/levelsmodule/" . 'arrow.png',
-        'order_history' => $this->getOrdersHistory(10)
+        'order_history' => $this->getOrdersHistory(10),
+        'link' => $link
       )
       );
     $this->setTemplate('display.tpl');

@@ -24,3 +24,8 @@ div.levels_module a:focus{
 .levels_nofloat {
   float:none;
 }
+.levels_module{
+  position: absolute!important;
+  right: 15px;
+  top: 100px;
+}
