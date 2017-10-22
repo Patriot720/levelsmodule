@@ -32,11 +32,11 @@ $icon_color:#aaa;
             animation-delay: 2s;
             p{
                 position: absolute;
-                left: -100%;
+                right: -100%;
             }
             img{
                 position: relative;
-                left: -10px;
+                right: -100%;
                 top:0px;
                 width: $height/30;
                 height: $height/30;
@@ -93,7 +93,6 @@ $icon_color:#aaa;
 }
 .levels_menu_item{
     padding: 20px;
-    width: 30%;
     color:#aaa;
     p{
         width: 150px;
@@ -114,24 +113,25 @@ $icon_color:#aaa;
     }
 }
 .levels_whole {
+    width: 30%;
     animation-delay:1s;
-    float: right;
-    padding-right: 100px;
+    display:inline-block
 }
 .all_levels{
+    height: 100%;
     animation-delay:2s;
 }
 .levels_label{
     opacity: .7;
 }
 .levels_menu{
-    height: 20%;
     animation-delay: 1s;
+    float: right;
 }
 .levels a{
     display: inline-block;
     background: fade-out(white,0.85);
-    width: 147px;
+    width: 20%;
     height: 40px;
     span{
         text-shadow: 1px 1px rgba(0,0,0,0.2);
@@ -150,15 +150,20 @@ $icon_color:#aaa;
 .levels_buttons{
     animation-delay: 3s;
     height: 10%;
-    padding-top: 10px;
-    padding-left: 35px;
+    margin-left:20%;
+}
+.levels_menu_wrap{
+    width: 70%;
+    float:right;
+}
+#levels_buttons_wrap{
+width: 100%;
+display: inline-block;
 }
 table{
     animation-delay: 2s;
-    position: absolute;
-    top: 250px;
-    left:50px;
-    width: 50%;
+    width: 90%;
+    margin-left: 7%;
     height: 30%;
     background: fade-out(white,0.85);
     text-shadow: 1px 1px rgba(0,0,0,0.2);

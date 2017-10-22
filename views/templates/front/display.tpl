@@ -33,6 +33,7 @@
     <div class="levels_bot"></div>
 
 </div>
+<div class="levels_menu_wrap">
 <div class="levels_menu animated fadeInLeft">
 <div class="levels_menu_item">
 <p>Текущий ЛВЛ</p> <div>{$levels_module_current_lvl}</div>
@@ -44,6 +45,22 @@
  <p>Всего заплачено</p> <div>{$levels_module_total_orders}</div>
  </div>
  </div>
+ <div id="levels_buttons_wrap">
+ <div class="levels_buttons animated fadeInDown">
+    <a href="{$link->getPageLink('addresses')}" title="Addresses">
+        <span>Мои адреса</span>
+    </a>
+        <a href="{$link->getPageLink('discount')}" title="Addresses">
+        <span>Купоны</span>
+    </a>
+        <a href="{$link->getPageLink('history')}" title="Addresses">
+        <span>Полная история</span>
+    </a>
+        <a href="{$link->getPageLink('identity')}" title="Addresses">
+        <span>Личная информация</span>
+    </a>
+</div>
+</div>
 <table class="table-bordered footab default footable-loaded footable animated fadeInDown">
     <thead>
         <tr>
@@ -74,18 +91,5 @@
     </tr>
     {/foreach}
 </table>
-<div class="levels_buttons animated fadeInDown">
-    <a href="{$link->getPageLink('addresses')}" title="Addresses">
-        <span>Мои адреса</span>
-    </a>
-        <a href="{$link->getPageLink('discount')}" title="Addresses">
-        <span>Купоны</span>
-    </a>
-        <a href="{$link->getPageLink('history')}" title="Addresses">
-        <span>Полная история</span>
-    </a>
-        <a href="{$link->getPageLink('identity')}" title="Addresses">
-        <span>Личная информация</span>
-    </a>
 </div>
 </div>

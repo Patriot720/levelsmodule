@@ -12,7 +12,6 @@ class levelsmoduledisplayModuleFrontController extends ModuleFrontController
     $levels_limits = $this->getLevelsLimits();
     $max_lvl_limit = $levels_limits['lvl'.$this->max_lvl];
     $link = new Link();
-    var_dump("");
     parent::initContent();
     $this->context->smarty->assign(
       array(
